@@ -1,0 +1,9 @@
+export { default as homeRouter } from './home.js';
+export { default as randomNumberRouter } from './randomNumber.js';
+export { default as timeRouter } from './time.js';
+export { default as timestampRouter } from './timestamp.js';
+export { default as passwordRouter } from './password.js';
+export { default as testRouter } from './test.js';
+export { default as testPostRouter } from './test-post.js';
+export { default as cardRouter } from './card.js';
+export { default as urlRouter } from './url.js';

@@ -1,0 +1,30 @@
+{
+  "id": "hoodie-001",
+  "name": "Classic Oversized Hoodie",
+  "brand": "UrbanWear",
+  "category": "Hoodie",
+  "gender": "Unisex",
+  "price": 59.99,
+  "currency": "USD",
+  "colors": ["Black", "Gray", "Beige"],
+  "sizes": ["XS", "S", "M", "L", "XL"],
+  "material": {
+    "main": "Cotton",
+    "composition": "80% Cotton, 20% Polyester"
+  },
+  "description": "A comfortable oversized hoodie made from soft cotton blend fabric. Perfect for casual wear and layering in cooler weather.",
+  "care_instructions": [
+    "Machine wash cold",
+    "Do not bleach",
+    "Tumble dry low",
+    "Iron at low temperature"
+  ],
+  "stock": 120,
+  "rating": 4.6,
+  "reviews_count": 87,
+  "sku": "UW-HOOD-CL-001",
+  "images": [
+    "https://example.com/images/hoodie-black.jpg",
+    "https://example.com/images/hoodie-gray.jpg"
+  ]
+}

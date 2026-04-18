@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/css/style.css')
+    title= pageTitle
+  body
+    main.about-page
+      h1= pageTitle
+      p.lead User name: #{userName}
+
+      if isStudent
+        p.status.status--ok Status: student
+      else
+        p.status Status: guest
+
+      section.card
+        h2 Pug topics
+        ul.topic-list
+          each topic in topics
+            li= topic
+
+      .downloads
+        h2 Download files
+        a(href='/images/i1.png', download) Link 1
+        br
+        a(href='/downloads/witch.png', download) Link 2
