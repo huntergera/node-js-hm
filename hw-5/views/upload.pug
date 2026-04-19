@@ -1,0 +1,6 @@
+h2= title
+
+form(method="POST", action="/upload", enctype="multipart/form-data")
+    label(for="file") Choose file:
+    input(type="file" id="file" name="file" required)
+    button(type="submit") Upload
