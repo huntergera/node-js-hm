@@ -4,9 +4,12 @@ import { STATUS_CODES, MESSAGES } from '../common/index.js';
 
 router.get('/', function (req, res) {
   const { min, max } = req.query;
+  const DEFAULT_MIN = 0;
+  const DEFAULT_MAX = 10;
 
   if (min === undefined && max === undefined) {
-    const randomNumber = Math.floor(Math.random() * 11);
+    const randomNumber =
+      Math.floor(Math.random() * (DEFAULT_MAX - DEFAULT_MIN + 1)) + DEFAULT_MIN;
 
     return res.json({
       action: 'random-number',

@@ -1,8 +1,20 @@
 import express from 'express';
 import generator from 'generate-password';
+import Ajv from 'ajv';
+import { schemaGoods } from '../models/schemaGoods.js';
+import { MESSAGES, STATUS_CODES } from '../common/index.js';
+
 const router = express.Router();
+const ajv = new Ajv();
+const validate = ajv.compile(schemaGoods);
 
 router.post('/', (req, res) => {
+  if (!validate(req.body)) {
+    return res
+      .status(STATUS_CODES.BAD_REQUEST)
+      .json({ error: MESSAGES.BAD_REQUEST });
+  }
+
   const articulValue = generator.generate({
     length: 8,
     numbers: true,
