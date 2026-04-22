@@ -1,6 +1,7 @@
 export const ROUTES = {
   HOME: '/',
   UPLOAD: '/upload',
+  LIST: '/upload/list',
 };
 
 export const STATUS_CODES = {

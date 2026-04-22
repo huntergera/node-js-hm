@@ -1,6 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import multer from 'multer';
+import { allFiles } from '../data/files.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -43,7 +44,6 @@ router
   })
   .post((req, res) => {
     upload.single('file')(req, res, (err) => {
-      console.log(req.file);
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
           return res.render('result', {
@@ -63,6 +63,13 @@ router
           message: MESSAGES.FILE_NOT_SELECTED,
         });
       }
+
+      allFiles.push({
+        fileName: req.file.filename,
+        originalName: req.file.originalname,
+        size: req.file.size,
+        uploadedAt: new Date(),
+      });
 
       res.render('result', {
         status: 'success',
