@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
   });
 
   const cities = result.map((city) => city.name);
-  console.log(cities)
   
   res.json({cities})
 });
