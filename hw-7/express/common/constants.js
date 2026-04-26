@@ -1,7 +1,6 @@
 export const ROUTES = {
   HOME: '/',
-  PRODUCT: '/product',
-  CLEAR: '/clear',
+  CITY: "/api/city",
 };
 
 export const STATUS_CODES = {
@@ -13,11 +12,3 @@ export const MESSAGES = {
   NOT_FOUND: 'Page 404 not found',
   SERVER_ERROR: 'Internal Server Error',
 };
-
-export const UTM_KEYS = [
-  'utm_source',
-  'utm_medium',
-  'utm_campaign',
-  'utm_term',
-];
-export const MAX_AGE = 25 * 24 * 60 * 60 * 1000; // 25 days
