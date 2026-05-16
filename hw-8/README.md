@@ -24,7 +24,3 @@ REST API built with Node.js, Express, and MongoDB.
 npm run dev
 
 Server starts at `http://localhost:3000`
-
-## Notes
-
-- There is no route mounted at `/` — use the API endpoints directly (e.g. `/api/sales`)
