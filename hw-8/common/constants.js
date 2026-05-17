@@ -1,4 +1,5 @@
 export const ROUTES = {
+  HOME: '/',
   SELLERS: '/api/v1/sellers',
   STORES: '/api/v1/stores',
   SALES: '/api/v1/sales',
