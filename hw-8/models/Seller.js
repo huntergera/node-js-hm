@@ -5,6 +5,7 @@ const sellerSchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      cast: false,
       required: [true, 'Name is required'],
       trim: true,
       minlength: [2, 'Name must be at least 2 characters'],
@@ -12,6 +13,7 @@ const sellerSchema = new mongoose.Schema(
     },
     email: {
       type: String,
+      cast: false,
       unique: true,
       trim: true,
       required: [true, 'Email is required'],
@@ -20,6 +22,7 @@ const sellerSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
+      cast: false,
       trim: true,
     },
     status: {

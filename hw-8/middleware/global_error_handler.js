@@ -11,13 +11,6 @@ export const globalErrorHandler = (err, req, res, next) => {
     });
   }
 
-  if (err.name === 'CastError') {
-    return res.status(400).json({
-      status: 'error',
-      message: MESSAGES.ID_ERROR,
-    });
-  }
-
   if (err.code === 11000) {
     return res.status(400).json({
       status: 'error',

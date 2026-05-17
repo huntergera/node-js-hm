@@ -3,6 +3,7 @@ const router = express.Router();
 import { MESSAGES } from '../common/constants.js';
 import Store from '../models/Store.js';
 import { STATUS } from '../common/constants.js';
+import { validateObjectId, checkEmptyBody } from '../middleware/validators.js';
 
 router.get('/', async (req, res, next) => {
   try {
@@ -17,7 +18,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', validateObjectId, async (req, res, next) => {
   try {
     const store = await Store.findById(req.params.id);
     if (!store || store.status === STATUS.INACTIVE) {
@@ -32,7 +33,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', checkEmptyBody, async (req, res, next) => {
   try {
     const store = await Store.create(req.body);
     res.status(201).json(store);
@@ -42,7 +43,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', validateObjectId, checkEmptyBody, async (req, res, next) => {
   try {
     const store = await Store.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -59,7 +60,7 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', validateObjectId, async (req, res, next) => {
   try {
     const store = await Store.findByIdAndUpdate(
       req.params.id,

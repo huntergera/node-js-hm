@@ -16,12 +16,20 @@ const saleSchema = new mongoose.Schema(
     amount: {
       type: Number,
       required: [true, 'Amount is required'],
-      min: [0.01, 'Amount must be greater than 0'],
+      min: [0, 'Amount must be greater than or equal to 0'],
+      validate: {
+        validator: (v) => /^\d+(\.\d{1,2})?$/.test(v.toString()),
+        message: 'Amount must have at most 2 decimal places',
+      },
     },
     itemsCount: {
       type: Number,
       required: [true, 'Items count is required'],
       min: [1, 'Items count must be greater than 0'],
+      validate: {
+        validator: Number.isInteger,
+        message: 'Items count must be an integer',
+      },
     },
     status: {
       type: Number,

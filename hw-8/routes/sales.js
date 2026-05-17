@@ -5,6 +5,8 @@ import Store from '../models/Store.js';
 import { MESSAGES, STATUS } from '../common/constants.js';
 const router = express.Router();
 import mongoose from 'mongoose';
+import { validateObjectId, checkEmptyBody } from '../middleware/validators.js';
+import { validateSaleRelations } from '../middleware/saleValidators.js';
 
 router.get('/', async (req, res, next) => {
   try {
@@ -90,7 +92,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', validateObjectId, async (req, res, next) => {
   try {
     const sale = await Sale.findById(req.params.id)
       .populate('sellerId', 'name email')
@@ -106,49 +108,43 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
-  try {
-    const { sellerId, storeId } = req.body;
-
-    const seller = await Seller.findById(sellerId);
-    if (!seller || seller.status === STATUS.INACTIVE) {
-      return res
-        .status(404)
-        .json({ status: 'error', message: MESSAGES.SELLER_NOT_FOUND });
+router.post(
+  '/',
+  checkEmptyBody,
+  validateSaleRelations,
+  async (req, res, next) => {
+    try {
+      const sale = await Sale.create(req.body);
+      res.status(201).json(sale);
+    } catch (error) {
+      next(error);
     }
+  },
+);
 
-    const store = await Store.findById(storeId);
-    if (!store || store.status === STATUS.INACTIVE) {
-      return res
-        .status(404)
-        .json({ status: 'error', message: MESSAGES.STORE_NOT_FOUND });
+router.patch(
+  '/:id',
+  validateObjectId,
+  checkEmptyBody,
+  async (req, res, next) => {
+    try {
+      const sale = await Sale.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+      if (!sale) {
+        return res
+          .status(404)
+          .json({ status: 'error', message: MESSAGES.NOT_FOUND });
+      }
+      res.json(sale);
+    } catch (error) {
+      next(error);
     }
+  },
+);
 
-    const sale = await Sale.create(req.body);
-    res.status(201).json(sale);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.patch('/:id', async (req, res, next) => {
-  try {
-    const sale = await Sale.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!sale) {
-      return res
-        .status(404)
-        .json({ status: 'error', message: MESSAGES.NOT_FOUND });
-    }
-    res.json(sale);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', validateObjectId, async (req, res, next) => {
   try {
     const sale = await Sale.findByIdAndUpdate(
       req.params.id,

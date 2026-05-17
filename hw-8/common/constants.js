@@ -19,6 +19,7 @@ export const MESSAGES = {
   STORE_FORMAT_ERROR: 'Invalid storeId format',
   SELLER_FORMAT_ERROR: 'Invalid sellerId format',
   DATE_FORMAT_ERROR: 'Invalid dateFrom format',
+  EMPTY_BODY_ERROR: 'Request body cannot be empty',
 };
 
 export const STATUS = {
