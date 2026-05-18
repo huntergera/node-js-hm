@@ -3,10 +3,11 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import logger from 'morgan';
-import cors from 'cors';
+// import cors from 'cors';
 import helmet from 'helmet';
 
 import connectDB from './config/database.js';
+import { runServer } from './config/serverRuntime.js';
 
 import { routes } from './routes/index.js';
 import { globalErrorHandler, notFoundHandler } from './middleware/index.js';
@@ -18,13 +19,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(logger('dev'));
-
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-    methods: ['GET', 'POST'],
-  }),
-);
 
 routes.forEach(({ path, router }) => {
   app.use(path, router);
@@ -39,4 +33,4 @@ const startServer = async () => {
   app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 };
 
-startServer();
+runServer(startServer);
