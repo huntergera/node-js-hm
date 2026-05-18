@@ -27,6 +27,7 @@ const sellerSchema = new mongoose.Schema(
     },
     status: {
       type: Number,
+      cast: false,
       enum: [STATUS.ACTIVE, STATUS.INACTIVE],
       default: STATUS.INACTIVE,
     },

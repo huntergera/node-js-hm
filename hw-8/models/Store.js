@@ -13,12 +13,14 @@ const storeSchema = new mongoose.Schema(
     },
     address: {
       type: String,
+      cast: false,
       trim: true,
       minlength: [2, 'Address must be at least 2 characters'],
       maxlength: [255, 'Address must not exceed 255 characters'],
     },
     status: {
       type: Number,
+      cast: false,
       enum: [STATUS.ACTIVE, STATUS.INACTIVE],
       default: STATUS.INACTIVE,
     },

@@ -15,6 +15,7 @@ const saleSchema = new mongoose.Schema(
     },
     amount: {
       type: Number,
+      cast: false,
       required: [true, 'Amount is required'],
       min: [0, 'Amount must be greater than or equal to 0'],
       validate: {
@@ -24,6 +25,7 @@ const saleSchema = new mongoose.Schema(
     },
     itemsCount: {
       type: Number,
+      cast: false,
       required: [true, 'Items count is required'],
       min: [1, 'Items count must be greater than 0'],
       validate: {
@@ -33,11 +35,13 @@ const saleSchema = new mongoose.Schema(
     },
     status: {
       type: Number,
+      cast: false,
       enum: [STATUS.ACTIVE, STATUS.INACTIVE],
       default: STATUS.ACTIVE,
     },
     date: {
       type: Date,
+      cast: false,
       required: [true, 'Date is required'],
     },
   },
